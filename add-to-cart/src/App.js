@@ -1,16 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from "./components/Navbar"
-import Home from "./components/Home"
+// App.js
+import React from 'react';
+import Productlist from './components/Productlist';
+import ShoppingCart from './components/Shopingcart';
 
 function App() {
   return (
-    <>
-      <div>
-        <Navbar />
-        <Home />
-      </div>
-    </>
+    <div>
+      <Productlist />
+      <ShoppingCart />
+    </div>
   );
 }
 

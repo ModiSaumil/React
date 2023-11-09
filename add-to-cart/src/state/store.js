@@ -1,5 +1,8 @@
-import {applyMiddleware, createStore} from "redux";
-import thunk from "redux-thunk";
-import reducers from "./Reducer/reducer_index"
+// store.js
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import cartReducer from './Reducer/reducer_index';
 
-export const storee = createStore(reducers,{},applyMiddleware(thunk))
+const store = createStore(cartReducer);
+
+export default store;

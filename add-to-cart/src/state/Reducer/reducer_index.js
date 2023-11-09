@@ -1,19 +1,63 @@
-import { combineReducers } from "redux";
-import reducer_qty from "./reducer_qty";
-import reducer_qty1 from "./reducer_qty1";
-import reducer_qty2 from "./reducer_qty2";
-import reducer_rs from "./reducer_rs"
-import reducer_rs1 from "./reducer_rs1"
-import reducer_rs2 from "./reducer_rs2"
+// reducers/cartReducer.js
+const initialState = {
+    cart: [],
+    totalAmount: 0,
+};
 
+let updatedTotalAmount = 0;
 
-const combine_reducer = combineReducers({
-    qty:reducer_qty,
-    qty1:reducer_qty1,
-    qty2:reducer_qty2,
-    rs:reducer_rs,
-    rs1:reducer_rs1,
-    rs2:reducer_rs2
-})
+const cartReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'ADD_TO_CART':
+            const newItem = action.payload;
+            newItem.totalPrice = newItem.price;
 
-export default combine_reducer
+            const existingItem = state.cart.find(item => item.id === newItem.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1; 
+                existingItem.totalPrice = existingItem.price * existingItem.quantity;
+                console.warn("add total price", existingItem.totalPrice)
+            } else {
+                return {
+                    ...state,
+                    cart: [...state.cart, newItem],
+                    totalAmount: state.totalAmount + newItem.totalPrice,
+                };
+            }
+            
+            updatedTotalAmount = state.cart.reduce((total, item) => total + item.totalPrice, 0);
+            return {
+                ...state,
+                totalAmount: updatedTotalAmount,
+            };
+
+        case 'REMOVE_FROM_CART':
+            const removedItem = action.payload;
+
+            if (removedItem.quantity > 1) {
+                
+                removedItem.quantity -= 1;
+                removedItem.totalPrice = removedItem.price * removedItem.quantity;
+            } else {
+                
+                const updatedCart = state.cart.filter(item => item.id !== removedItem.id);
+                updatedTotalAmount = updatedCart.reduce((total, item) => total + item.totalPrice, 0);
+                return {
+                    ...state,
+                    cart: updatedCart,
+                    totalAmount: updatedTotalAmount,
+                };
+            }
+
+            updatedTotalAmount = state.cart.reduce((total, item) => total + item.totalPrice, 0);
+            return {
+                ...state,
+                totalAmount: updatedTotalAmount,
+            };
+        default:
+            return state;
+    }
+};
+
+export default cartReducer;
