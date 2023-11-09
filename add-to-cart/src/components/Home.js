@@ -64,7 +64,7 @@ const Home = () => {
             <div className="row row-cols-1 row-cols-md-3 g-4 mt-3">
                 <div className="col">
                     <div className="card h-100">
-                        <img src="./assets/menu-item-3.png" className="card-img-top" alt="..." />
+                        <img src="./logo512.png" className="card-img-top" alt="..." />
                         <div className="card-body">
                             <div className='d-flex justify-content-center align-items-center'>
                                 <button className='btn btn-primary' onClick={sub}><i class="fa-solid fa-minus"></i></button>
@@ -79,7 +79,7 @@ const Home = () => {
                 </div>
                 <div className="col">
                     <div className="card h-100">
-                        <img src="./assets/menu-item-4.png" className="card-img-top" alt="..." />
+                        <img src="./logo512.png" className="card-img-top" alt="..." />
                         <div className="card-body">
                             <div className='d-flex justify-content-center align-items-center'>
                                 <button className='btn btn-primary' onClick={sub1}><i class="fa-solid fa-minus"></i></button>
@@ -94,7 +94,7 @@ const Home = () => {
                 </div>
                 <div className="col">
                     <div className="card h-100">
-                        <img src="./assets/menu-item-5.png" className="card-img-top" alt="..." />
+                        <img src="./logo512.png" className="card-img-top" alt="..." />
                         <div className="card-body">
                             <div className='d-flex justify-content-center align-items-center'>
                                 <button className='btn btn-primary' onClick={sub2}><i class="fa-solid fa-minus"></i></button>
