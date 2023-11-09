@@ -6,9 +6,6 @@ import Headercontainer from './containers/headercontainer';
 function App() {
   return (
     <div className="App">
-      <h1>
-        app component
-      </h1>
       <Headercontainer></Headercontainer>
       <Home></Home>
     </div>

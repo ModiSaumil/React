@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../constant"
+import { ADD_TO_CART,REMOVE_TO_CART } from "../constant"
 
 export const addtocart = (data) =>{
     // console.warn("action")
@@ -8,10 +8,9 @@ export const addtocart = (data) =>{
     }
 }
 
-
-export const removetocart = (data) =>{
+export const removetocart = () =>{
+    console.warn("action")
     return {
-        type: 'REMOVE_TO_CART',
-        data:data
+        type: REMOVE_TO_CART,
     }
 }
