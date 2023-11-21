@@ -35,9 +35,10 @@ const Cricket = () => {
                 data.map((item, index) => (
 
                     <div key={index}>
-                        <p>{item.match_subtitle} - {item.venue}</p>
+                        <p style={{color:'blue'}}>{item.match_subtitle} - {item.venue}</p>
                         <h4>{item.home.name} VS {item.away.name}</h4>
                         <p style={{color:'red'}}>Status : {item.result}</p>
+                        <p>===========================================================================================================================================================================</p>
                     </div>
                 ))
             }
