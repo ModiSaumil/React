@@ -4,34 +4,58 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Update_post = () => {
-  const navigate = useNavigate()
-  const params = useParams()
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const [postData, setPostData] = useState({
+    title: '',
+    body: '',
+  });
 
   useEffect(() => {
-    console.warn("id get", params.id);
-  }, [])
+    displayPost();
+  }, []);
+
+  const displayPost = async () => {
+    try {
+      const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
+      setPostData(response.data);
+    } catch (error) {
+      console.error('Error fetching post:', error);
+    }
+  };
 
   const updatePost = async () => {
-    let url = await axios.put(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
-  }
+    try {
+      await axios.put(`https://jsonplaceholder.typicode.com/posts/${params.id}`, postData);
+      console.log("Post-Update",postData.title)
+      console.log("Post-Update",postData.body)
+      // navigate("/")
+    } catch (error) {
+      console.error('Error updating post:', error);
+    }
+  };
 
-
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({
+      ...postData,
+      [name]: value,
+    });
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-      updatePost();
+    updatePost();
   };
 
   const disp = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   return (
     <>
       <div className='container'>
-        <div>
-          <button className='btn btn-primary' onClick={disp}>Display Posts</button>
-        </div>
         <form onSubmit={handleFormSubmit}>
           <p className='fw-bolder fs-1 text-center bg-dark text-warning m-2'>
             Update Post
@@ -40,20 +64,25 @@ const Update_post = () => {
             <input
               type='text'
               name='title'
-
-              
+              value={postData.title}
+              onChange={handleInputChange}
               className='form-control mb-1 mt-2'
               placeholder='Enter Your Title of Post'
             ></input>
             <input
               type='text'
               name='body'
-
-              
+              value={postData.body}
+              onChange={handleInputChange}
               className='form-control mb-3'
               placeholder='Enter Your Body of Post'
             ></input>
-            <button className='btn btn-success' onClick={updatePost}>Update Post</button>
+            <button className='btn btn-success' onClick={updatePost}>
+              Update Post
+            </button>
+          </div>
+          <div className='mt-5 text-center'>
+            <button className='btn btn-primary' onClick={disp}>Display Posts</button>
           </div>
         </form>
       </div>
