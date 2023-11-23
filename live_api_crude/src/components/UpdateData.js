@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const UpdateData = () => {
 
@@ -19,7 +19,7 @@ const UpdateData = () => {
     navigate("/")
   };
 
-  const updateEmployee = async ()=>{
+  const updateEmployee = async () => {
     try {
       let response = await axios.put(
         `http://192.168.29.156:3041/api/user/update/${selectedEmployee.idUser}`,
@@ -35,34 +35,34 @@ const UpdateData = () => {
       let result = response.data;
       console.log(result);
       setNewFullName(result.data);
-      
-  } catch (error) {
+
+    } catch (error) {
       console.error('Error adding employee:', error);
-  }
+    }
   }
 
   return (
     <div>
-            <div className='container'>
-                <form >
-                    <p className='fw-bolder fs-1 text-center bg-dark text-warning m-2'>
-                        Create Post
-                    </p>
-                    <div className='d-flex flex-column'>
-                        <input
-                            type='text'
-                            name='fullName'
-                            value={newFullName}
-                            onChange={(e) => setNewFullName(e.target.value)}
-                            className='form-control mb-1 mt-2'
-                            placeholder='Enter Your fullname'
-                        ></input>
-        
-                        <button className='btn btn-success' onClick={handleUpdate}>Update Employee</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+      <div className='container'>
+        <form >
+          <p className='fw-bolder fs-1 text-center bg-dark text-warning m-2'>
+            Create Post
+          </p>
+          <div className='d-flex flex-column'>
+            <input
+              type='text'
+              name='fullName'
+              value={newFullName}
+              onChange={(e) => setNewFullName(e.target.value)}
+              className='form-control mb-1 mt-2'
+              placeholder='Enter Your fullname'
+            ></input>
+
+            <button className='btn btn-success' onClick={handleUpdate}>Update Employee</button>
+          </div>
+        </form>
+      </div>
+    </div>
   )
 }
 
