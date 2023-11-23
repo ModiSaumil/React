@@ -21,7 +21,7 @@ const Adddata = () => {
         try {
             let response = await axios.post('http://192.168.29.156:3041/api/user/register', data, {
                 headers: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjk3LCJpZERldmljZSI6OCwic2VyaWFsTnVtYmVyIjoiU0E0NTQ1YXM0NWE0IiwidmVyc2lvbk51bWJlciI6IjEuMCIsImF1ZCI6ImxvY2FsaG9zdCIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTcwMDYyODQyMiwiZXhwIjoxNzAzMjIwNDIyfQ.hiCSuGVM5cIkqpMJsNVez80w4d0p8cpRF-TNNSg5oe4',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjk3LCJpZERldmljZSI6OCwic2VyaWFsTnVtYmVyIjoiU0E0NTQ1YXM0NTE3IiwidmVyc2lvbk51bWJlciI6IjEuMCIsImF1ZCI6ImxvY2FsaG9zdCIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTcwMDczMTIzNCwiZXhwIjoxNzAzMzIzMjM0fQ.oHWYryLMuE6iQvWBEizDFWstnJtbBF7GKv2eC9e1d5U',
                     'Content-Type': 'application/json', // Add this line to specify the content type
                 },
             });

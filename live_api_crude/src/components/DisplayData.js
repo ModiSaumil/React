@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
-
 
 const DisplayData = () => {
 
@@ -16,7 +15,7 @@ const DisplayData = () => {
         try {
             let response = await axios.get("http://192.168.29.156:3041/api/user/details?pagination=no&page=1&limit=10&role=Employee", {
                 headers: {
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjk3LCJpZERldmljZSI6OCwic2VyaWFsTnVtYmVyIjoiU0E0NTQ1YXM0NWE0IiwidmVyc2lvbk51bWJlciI6IjEuMCIsImF1ZCI6ImxvY2FsaG9zdCIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTcwMDYyODQyMiwiZXhwIjoxNzAzMjIwNDIyfQ.hiCSuGVM5cIkqpMJsNVez80w4d0p8cpRF-TNNSg5oe4"
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjk3LCJpZERldmljZSI6OCwic2VyaWFsTnVtYmVyIjoiU0E0NTQ1YXM0NTE3IiwidmVyc2lvbk51bWJlciI6IjEuMCIsImF1ZCI6ImxvY2FsaG9zdCIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTcwMDczMTIzNCwiZXhwIjoxNzAzMzIzMjM0fQ.oHWYryLMuE6iQvWBEizDFWstnJtbBF7GKv2eC9e1d5U"
                 }
             })
             let result = response.data;
@@ -27,21 +26,33 @@ const DisplayData = () => {
         }
     }
 
-    const delete_post = async () => {
+    const delete_post = async (idUser) => {
         try {
-            let response = await axios.delete(`http://192.168.29.156:3041/api/user/delete` ,{
+            console.warn(idUser)
+            let response = await axios.delete(`http://192.168.29.156:3041/api/user/delete`,{
                 headers: {
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjk3LCJpZERldmljZSI6OCwic2VyaWFsTnVtYmVyIjoiU0E0NTQ1YXM0NWE0IiwidmVyc2lvbk51bWJlciI6IjEuMCIsImF1ZCI6ImxvY2FsaG9zdCIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTcwMDYyODQyMiwiZXhwIjoxNzAzMjIwNDIyfQ.hiCSuGVM5cIkqpMJsNVez80w4d0p8cpRF-TNNSg5oe4"
-                }
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjk3LCJpZERldmljZSI6OCwic2VyaWFsTnVtYmVyIjoiU0E0NTQ1YXM0NTE3IiwidmVyc2lvbk51bWJlciI6IjEuMCIsImF1ZCI6ImxvY2FsaG9zdCIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTcwMDczMTIzNCwiZXhwIjoxNzAzMzIzMjM0fQ.oHWYryLMuE6iQvWBEizDFWstnJtbBF7GKv2eC9e1d5U"
+                },
+                data: {
+                    idUser: idUser,
+                    idUserToTransferOrder: "1",
+                },
             })
             console.warn("delete button clicked")
             let result = response.data;
             console.log(result);
             setData(result.data)
+            window.location.reload();
         } catch (error) {
             console.error("Error", error)
         }
     }
+
+    const handleUpdate = (id) => {
+        const selectedEmployee = data.find((item) => item.idUser === id);
+        console.log(selectedEmployee);
+        navigate('/updatedata', { state: { selectedEmployee } });
+    };
 
     return (
         <>
@@ -74,7 +85,7 @@ const DisplayData = () => {
                         </div>
                     </div>
                 </div>
-                {data.map((item, index) => (
+                {data?.map((item, index) => (
                     <div>
                         <div className='row border border-1 border-dark'>
                             <div key={index} className='col-2 d-flex justify-content-center align-items-center'>
@@ -93,8 +104,8 @@ const DisplayData = () => {
                                 <p className='text-center'>{item.employeeCode}</p>
                             </div>
                             <div className='col-2 d-flex justify-content-center align-items-center'>
-                                <button type='button' onClick={delete_post} className='btn btn-danger'> Delete</button>
-                                <button type='button' className='btn btn-warning'><Link to={'/updatedata/' + item.idUser}>Update</Link></button>
+                                <button type='button' onClick={()=> delete_post(item.idUser)} className='btn btn-danger'> Delete</button>
+                                <button type='button' onClick={() => handleUpdate(item.idUser)} className='btn btn-warning'>Update</button>
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<DisplayData />}></Route>
           <Route path="/addData" element={<Adddata />}></Route>
-          <Route path="/updatedata/:id" element={<UpdateData />}></Route>
+          <Route path="/updatedata" element={<UpdateData />}></Route>
         </Routes>
       </BrowserRouter>
 
